@@ -73,8 +73,14 @@ public class UserService {
     }
 
     public User getAuthenticatedUser() {
-        String authEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        return repository.findByEmail(authEmail).orElseThrow(() -> new UserNotFoundException());
+        String authEmail = SecurityContextHolder
+        .getContext()
+        .getAuthentication()
+        .getName();
+
+        return repository
+        .findByEmail(authEmail)
+        .orElseThrow(() -> new UserNotFoundException());
     }
     
 }
