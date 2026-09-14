@@ -49,8 +49,8 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUserById(Long id, UpdateUserRequest updateRequest) {
-        User user = getUserById(id);
+    public User updateUserById(UpdateUserRequest updateRequest) {
+        User user = getAuthenticatedUser();
         String userName = updateRequest.getName();
 
         if (StringUtils.isNotBlank(userName)) {
@@ -67,8 +67,8 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUserById(Long id) {
-        User user = getUserById(id);
+    public void deleteUserById() {
+        User user = getAuthenticatedUser();
         repository.delete(user);
     }
 

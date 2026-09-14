@@ -33,21 +33,21 @@ public class UserController {
         return new UserResponse(service.registerUser(user));
     }
 
-    @GetMapping("/{id}")
-    public UserResponse getUser(@PathVariable Long id) {
-        User user = service.getUserById(id);
+    @GetMapping
+    public UserResponse getUser() {
+        User user = service.getAuthenticatedUser();
         return new UserResponse(user);
     }
 
-    @PatchMapping("/{id}")
-    public UserResponse updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserRequest updateRequest) {
-        User user = service.updateUserById(id, updateRequest);
+    @PatchMapping
+    public UserResponse updateUser(@Valid @RequestBody UpdateUserRequest updateRequest) {
+        User user = service.updateUserById(updateRequest);
         return new UserResponse(user);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> removeUser(@PathVariable Long id) {
-        service.deleteUserById(id);
+    @DeleteMapping
+    public ResponseEntity<Object> removeUser() {
+        service.deleteUserById();
         return ResponseEntity.noContent().build();
     }
 }
