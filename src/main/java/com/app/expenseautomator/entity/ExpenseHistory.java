@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,9 +26,9 @@ public class ExpenseHistory {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "expense_id", referencedColumnName = "id")
-    private List<Expense> expense;
+    @ManyToOne (fetch = FetchType.LAZY) 
+    @JoinColumn(name = "expense_id", nullable = false)
+    private Expense expense;
 
     @Column(nullable = false)
     private LocalDate expenseLoggedOn;
@@ -38,7 +38,7 @@ public class ExpenseHistory {
         return id;
     }
 
-    public List<Expense> getExpense() {
+    public Expense getExpense() {
         return expense;
     }
 
@@ -50,7 +50,7 @@ public class ExpenseHistory {
         this.id = id;
     }
 
-    public void setExpense(List<Expense> expense) {
+    public void setExpense(Expense expense) {
         this.expense = expense;
     }
 
