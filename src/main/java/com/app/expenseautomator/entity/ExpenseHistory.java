@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
