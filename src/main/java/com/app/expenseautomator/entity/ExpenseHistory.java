@@ -32,6 +32,12 @@ public class ExpenseHistory {
     @Column(nullable = false)
     private LocalDate expenseLoggedOn;
 
+    public ExpenseHistory() {}
+
+    public ExpenseHistory(Expense expense, LocalDate logDate) {
+        this.setExpense(expense);
+        this.setExpenseLoggedOn(logDate);
+    }
 
     public Long getId() {
         return id;

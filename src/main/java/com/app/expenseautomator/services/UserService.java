@@ -1,8 +1,8 @@
 package com.app.expenseautomator.services;
 
-import java.util.Optional;
+import java.util.List;
 
-import org.springframework.security.core.Authentication;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -81,6 +81,10 @@ public class UserService {
         return repository
         .findByEmail(authEmail)
         .orElseThrow(() -> new UserNotFoundException());
+    }
+
+    public List<User> getAllUsers() {
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
     
 }
