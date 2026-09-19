@@ -2,11 +2,12 @@ package com.app.expenseautomator.dtos.expense;
 
 import java.time.LocalDate;
 
-import com.app.expenseautomator.enums.ExpenseType;
+import com.app.expenseautomator.enums.ExpenseFrequency;
 import com.app.expenseautomator.validations.ValidEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CreateExpenseRequest {
@@ -17,29 +18,30 @@ public class CreateExpenseRequest {
     @Min(value = 1, message = "Expense should neither be and nor less than 0")
     private Float value;
 
-    @ValidEnum(enumClass = ExpenseType.class)
-    private String expenseType;
+    @ValidEnum(enumClass = ExpenseFrequency.class)
+    private String expenseFrequency;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate startTime;
+    @NotNull(message = "Start date cannot be blank")
+    private LocalDate startDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate endTime;
+    private LocalDate endDate;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setExpenseType(String expenseType) {
-        this.expenseType = expenseType;
+    public void setExpenseFrequency(String expenseFrequency) {
+        this.expenseFrequency = expenseFrequency;
     }
 
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public void setValue(Float value) {
@@ -50,16 +52,16 @@ public class CreateExpenseRequest {
         return name;
     }
 
-    public String getExpenseType() {
-        return expenseType;
+    public String getExpenseFrequency() {
+        return expenseFrequency;
     }
 
-    public LocalDate getStartTime() {
-        return startTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public LocalDate getEndTime() {
-        return endTime;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public Float getValue() {

@@ -20,7 +20,7 @@ public class ExpenseScheduler {
     private ExpenseService expenseService;
 
     @Scheduled(fixedRate = 60000)
-    public void dailyExpenseScheduler() {
+    public void syncExpenses() {
         List<User> users = userService.getAllUsers();
 
         for (User user : users) {

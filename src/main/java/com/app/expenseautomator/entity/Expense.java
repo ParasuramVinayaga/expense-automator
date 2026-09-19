@@ -1,12 +1,13 @@
 package com.app.expenseautomator.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.app.expenseautomator.enums.ExpenseType;
+import com.app.expenseautomator.enums.ExpenseFrequency;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,17 +39,17 @@ public class Expense {
     private Float value;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "expense_type")
-    private ExpenseType expenseType;
+    @Column(name = "frequency", nullable = false)
+    private ExpenseFrequency frequency;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
-    private LocalDateTime startTime;
+    private LocalDate startDate;
 
-    private LocalDateTime endTime;
+    private LocalDate endDate;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -68,20 +69,20 @@ public class Expense {
         this.name = name;
     }
 
-    public void setExpenseType(ExpenseType expenseType) {
-        this.expenseType = expenseType;
+    public void setFrequency(ExpenseFrequency frequency) {
+        this.frequency = frequency;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -104,20 +105,20 @@ public class Expense {
         return name;
     }
 
-    public ExpenseType getExpenseType() {
-        return expenseType;
+    public ExpenseFrequency getFrequency() {
+        return frequency;
     }
 
     public User getUser() {
         return user;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public LocalDateTime getCreatedAt() {

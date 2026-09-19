@@ -1,28 +1,29 @@
 package com.app.expenseautomator.dtos.expense;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.app.expenseautomator.entity.Expense;
-import com.app.expenseautomator.enums.ExpenseType;
+import com.app.expenseautomator.enums.ExpenseFrequency;
 
 public class ExpenseResponse {
     
     private Long id;
     private String name;
-    private ExpenseType expenseType;
+    private ExpenseFrequency frequency;
     private Float value;
-    private LocalDate startTime;
-    private LocalDate endTime;
-    private LocalDate createdAt;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDateTime createdAt;
 
     public ExpenseResponse(Expense expense) {
         id = expense.getId();
         name = expense.getName();
-        expenseType = expense.getExpenseType();
+        frequency = expense.getFrequency();
         value = expense.getValue();
-        startTime = expense.getStartTime().toLocalDate();
-        endTime = expense.getEndTime().toLocalDate();
-        createdAt = expense.getCreatedAt().toLocalDate();
+        startDate = expense.getStartDate();
+        endDate = expense.getEndDate();
+        createdAt = expense.getCreatedAt();
     }
 
     public Long getId() {
@@ -33,19 +34,19 @@ public class ExpenseResponse {
         return name;
     }
 
-    public ExpenseType getExpenseType() {
-        return expenseType;
+    public ExpenseFrequency getExpenseType() {
+        return frequency;
     }
 
-    public LocalDate getStartTime() {
-        return startTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public LocalDate getEndTime() {
-        return endTime;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
