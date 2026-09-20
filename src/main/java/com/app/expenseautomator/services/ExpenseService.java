@@ -171,6 +171,10 @@ public class ExpenseService {
                 continue;
             }
 
+            if (expenseEndDate == null && nextLogDate.isAfter(LocalDate.now())) {
+                continue;
+            }
+
             expenseHistoryRepo.save(new ExpenseHistory(history.getExpense(), nextLogDate));
         }
     }
