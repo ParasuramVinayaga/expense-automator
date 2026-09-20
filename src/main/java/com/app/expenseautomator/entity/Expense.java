@@ -2,6 +2,7 @@ package com.app.expenseautomator.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,6 +21,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -58,6 +60,9 @@ public class Expense {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "expense")
+    private Set<ExpenseHistory> histories;
 
     public Expense() {}
 
@@ -131,5 +136,13 @@ public class Expense {
 
     public Float getValue() {
         return value;
+    }
+
+    public void setHistories(Set<ExpenseHistory> historiesSet) {
+        histories = historiesSet;
+    }
+
+    public Set<ExpenseHistory> getHistories() {
+        return histories;
     }
 }

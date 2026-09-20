@@ -37,7 +37,7 @@ public class ExpenseController {
         return response;
     }
 
-    @GetMapping ("/expenses")
+    @GetMapping("/list")
     public PayloadWrapper listExpenses() {
         List<Expense> expenseList = service.listAuthUserExpenses();
 

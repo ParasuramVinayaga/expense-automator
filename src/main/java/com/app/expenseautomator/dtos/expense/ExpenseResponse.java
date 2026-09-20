@@ -2,55 +2,53 @@ package com.app.expenseautomator.dtos.expense;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 
 import com.app.expenseautomator.entity.Expense;
+import com.app.expenseautomator.entity.ExpenseHistory;
 import com.app.expenseautomator.enums.ExpenseFrequency;
 
 public class ExpenseResponse {
     
-    private Long id;
-    private String name;
-    private ExpenseFrequency frequency;
-    private Float value;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalDateTime createdAt;
+    private Expense expense;
 
     public ExpenseResponse(Expense expense) {
-        id = expense.getId();
-        name = expense.getName();
-        frequency = expense.getFrequency();
-        value = expense.getValue();
-        startDate = expense.getStartDate();
-        endDate = expense.getEndDate();
-        createdAt = expense.getCreatedAt();
+        this.expense = expense;
     }
 
     public Long getId() {
-        return id;
+        return expense.getId();
     }
 
     public String getName() {
-        return name;
+        return expense.getName();
     }
 
     public ExpenseFrequency getExpenseType() {
-        return frequency;
+        return expense.getFrequency();
     }
 
     public LocalDate getStartDate() {
-        return startDate;
+        return expense.getStartDate();
     }
 
     public LocalDate getEndDate() {
-        return endDate;
+        return expense.getEndDate();
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return expense.getCreatedAt();
     }
 
     public Float getValue() {
-        return value;
+        return expense.getValue();
+    }
+
+    public List<ExpenseHistoryResponse> getHistories() {
+        return expense.getHistories().stream()
+        .sorted(Comparator.comparing(ExpenseHistory::getExpenseLoggedOn))
+        .map((history) -> new ExpenseHistoryResponse(history))
+        .toList();
     }
 }
