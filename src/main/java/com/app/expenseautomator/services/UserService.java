@@ -22,8 +22,11 @@ public class UserService {
 
     private UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    private BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -35,7 +38,7 @@ public class UserService {
 
         User newUser = new User();
         newUser.setEmail(userEmail);
-        String encodedPassword = (new BCryptPasswordEncoder()).encode(user.getPassword());
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         newUser.setPassword(encodedPassword);
         String userName = user.getName();
         newUser.setName(StringUtils.isNotBlank(userName) ? userName : newUser.getNameFromEmail());
@@ -60,7 +63,7 @@ public class UserService {
         String password = updateRequest.getPassword();
 
         if (StringUtils.isNotBlank(password)) {
-            user.setPassword(password);
+            user.setPassword(passwordEncoder.encode(password));
         }
 
         return repository.save(user);
