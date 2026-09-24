@@ -142,7 +142,6 @@ public class ExpenseService {
         return expenseRepo.save(expenseToUpdate);
     }
 
-    // Method to sync expenses
     public void syncExpenseFor(User user) {
         List<Expense> expenses = listByUser(user);
 
